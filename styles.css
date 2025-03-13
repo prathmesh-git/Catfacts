@@ -37,6 +37,8 @@ p{
 #btn{
     margin-top: 30px;
     background-color: #F9C5C5;
+    cursor: pointer;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 #cats-img{
@@ -46,4 +48,6 @@ p{
     border-radius: 1.5px;
 }
 
-    
+#btn:hover{
+   transform: scale(1.04);
+}
