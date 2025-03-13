@@ -13,7 +13,7 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
-    background: url(bg-image.jpg) no-repeat center/cover;
+    background: url(asssets/bg-image.jpg) no-repeat center/cover;
     opacity: 0.6; /* Adjust opacity */
     z-index: -1;
 }
@@ -28,6 +28,11 @@ p{
     color: #000000;
     font-size: 1.1rem;
     font-weight: 500;
+    background-color: #FFF5E1;  /* Soft Cream */
+    padding: 10px;  /* Adds space inside the paragraph */
+    border-radius: 8px;  /* Rounds the corners */
+    display: inline-block; /* Ensures background wraps around text */
+
 }
 
 #btn{
@@ -41,4 +46,5 @@ p{
     border: 1.5px solid #C1A8A0;
     border-radius: 1.5px;
 }
- 
+
+    
