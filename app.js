@@ -32,9 +32,10 @@ btn.addEventListener("click", async ()=>{
     let p = document.querySelector("#results");
     p.innerText = factLink;
 
+    if (btn.innerText === "Get Fact") {
+        btn.innerText = "Another One";
+    }
 
-
-    
 })
 
 
