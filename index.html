@@ -1,41 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cat Facts</title>
+    <title>Random Cat Facts</title>
+    <meta name="description" content="Discover random and interesting facts about cats with cute pictures!">
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Quicksand:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- Bootstrap (Grid Only) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-grid.min.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
+
 <body>
 
     <div class="background"></div>
+    <div class="overlay"></div>
 
-    <h1>Random Cat Facts</h1>
+    <main class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="glass-card">
 
-    <div class="main-container">
+            <!-- Interactive Mascot (Lottie) positioned at top-left -->
+            <div class="mascot-container-top">
+                <lottie-player id="interactive-mascot" src="assets/Cat Sleeping.json" background="transparent" speed="1"
+                    style="width: 100%; height: 100%;" loop autoplay>
+                </lottie-player>
+            </div>
 
-        <div class="img-container">
-            <div class="spinner hidden"></div>
-            <img id="cats-img" class="img-thumbnail" />
+            <!-- Cute decorations -->
+            <div class="decoration paw-1"><i class="bi bi-paw-fill"></i></div>
+            <div class="decoration paw-2"><i class="bi bi-balloon-heart-fill"></i></div>
+
+            <header class="text-center mb-3">
+                <div class="icon-wrapper mb-2">
+                    <i class="bi bi-chat-heart-fill" style="font-size: 2rem; color: #ff84a6;"></i>
+                </div>
+                <h1>Random Cat Facts</h1>
+                <p class="subtitle">Your daily dose of feline fun!</p>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="img-container mb-3">
+                    <div class="spinner" id="loader-spinner" style="display: none;">
+                        <!-- Lottie Loader (Restored) -->
+                        <lottie-player id="cat-lottie" src="https://assets.codepen.io/3685267/cute-cat-works.json"
+                            background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay>
+                        </lottie-player>
+                        <!-- Fallback -->
+                        <div id="fallback-loader" style="display: none;" class="text-center">
+                            <i class="bi bi-arrow-repeat"
+                                style="font-size: 3rem; color: #ff9a9e; animation: spin 1s infinite linear;"></i>
+                        </div>
+                    </div>
+                    <img id="cats-img" src="" alt="A cute random cat" class="img-fluid" loading="lazy"
+                        style="opacity: 0;">
+                </div>
+
+                <div class="fact-container">
+                    <i class="bi bi-quote quote-icon"></i>
+                    <p id="results" class="fact-text" aria-live="polite">Click the button below to discover a new fact!
+                    </p>
+                </div>
+
+                <div class="action-area mt-4">
+                    <button id="btn" class="btn-primary-custom" aria-label="Get a new cat fact">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"
+                            style="margin-right: 8px; fill: white; display: inline-block; vertical-align: middle;">
+                            <path
+                                d="M335.646 261.389c3.551 3.102 6.961 6.337 10.354 9.611.717.665 1.434 1.33 2.172 2.015 28.564 27.193 47.915 72.627 50.031 111.738.272 22.059-6.259 40.795-21.39 56.996-14.141 13.4-30.42 19.046-49.707 18.738-9.82-.503-19.08-3.767-28.406-6.668-32.937-10.01-66.717-6.271-98.934 4.234-13.685 4.06-29.657 3.561-42.765-2.054-.877-.362-1.753-.725-2.656-1.098-6.566-2.989-11.936-7.173-17.344-11.903-.616-.52-1.232-1.041-1.867-1.578-13.834-12.623-20.621-31.651-21.518-49.974-1.089-43.427 22.264-88.229 51.062-119.339 45.975-47.639 119.791-53.914 170.968-10.72z" />
+                            <path
+                                d="M361.5 60.195c18.856 13.612 29.46 34.691 33.164 57.38 3.84 27.716-.329 56.952-17.164 79.921-9.066 11.708-21.563 21.165-36.5 23.504-17.592 1.118-31.499-2.572-45.125-14.187-17.802-16.715-26.264-41.398-27.059-65.414-.51-25.366 5.227-52.413 23.184-71.398 18.795-19.54 46.208-24.81 69.5-9.806z" />
+                            <path
+                                d="M206.125 58.688c19.469 12.48 29.743 32.352 34.875 54.312 5.731 26.925 1.426 56.441-13 80-2.744 3.947-5.695 7.512-9 11-.686.727-1.372 1.454-2.079 2.203-10.849 10.529-24.492 15.237-39.341 15.161-15.067-.367-28.244-7.595-38.58-18.364-17.809-20.231-24.055-46.955-22.894-73.427 1.557-24.325 9.91-47.176 27.582-64.385 17.863-15.352 41.96-17.862 62.437-6.5z" />
+                            <path
+                                d="M473.313 187.313c13.238 10.024 20.794 23.274 23.687 39.687 1.874 25.767-2.583 48.77-19.343 69.028-10.013 11.206-24.059 20.31-39.344 21.184-14.379.474-25.391-3.991-36.438-13.336-11.174-10.534-17.693-25.776-18.148-41.164-.56-24.464 4.571-46.478 21.488-64.871 18.032-18.386 45.328-26.684 68.098-11.528z" />
+                            <path
+                                d="M92.688 187.188c18.68 12.824 30.604 31.785 34.901 54.023 3.118 21.133-.022 40.972-12.549 58.54-6.345 7.736-16.624 15.294-26.738 17.07-19.15 1.496-33.836-2.842-48.664-15.375-11.63-10.785-18.432-24.372-22.637-39.445-.281-.995-.281-.995-.569-2.009-1.683-6.586-1.764-13.033-1.744-19.803-.024-1.648-.024-1.648-.049-3.33-.01-16.501 5.383-31.738 17.007-43.674 17.252-15.862 40.887-18.113 61.042-5.997z" />
+                        </svg>
+                        Get New Fact
+                    </button>
+                </div>
+            </div>
+
         </div>
+    </main>
 
-        <p id="results">Click the button to get a cat fact!</p>
 
-        <button id="btn">Get Fact</button>
-    </div>
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
-    <!-- Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <!-- App Script -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+    <script src="app.js?v=2"></script>
 
-    <!-- Custom JS -->
-    <script src="app.js"></script>
+    <script>
+        // Wait for page to fully load before initializing interactivity
+        window.addEventListener('load', function () {
+            // Function to initialize cat interactivity with retry logic
+            function initCatInteractivity(retries = 0) {
+                const mascot = document.querySelector('#interactive-mascot');
+
+                if (!mascot || typeof LottieInteractivity === 'undefined') {
+                    if (retries < 10) {
+                        setTimeout(() => initCatInteractivity(retries + 1), 200);
+                    } else {
+                        console.warn('Could not initialize cat interactivity');
+                    }
+                    return;
+                }
+
+                // Check if lottie player is ready
+                if (mascot.getLottie && mascot.getLottie()) {
+                    try {
+                        LottieInteractivity.create({
+                            player: '#interactive-mascot',
+                            mode: 'cursor',
+                            actions: [{
+                                position: { x: [0, 1], y: [0, 1] },
+                                type: 'seek',
+                                frames: [0, 180]
+                            }]
+                        });
+                        console.log('Cat interactivity initialized!');
+                    } catch (error) {
+                        console.error('Error initializing interactivity:', error);
+                    }
+                } else {
+                    // Player not ready, retry
+                    if (retries < 10) {
+                        setTimeout(() => initCatInteractivity(retries + 1), 200);
+                    }
+                }
+            }
+
+            // Start initialization
+            setTimeout(() => initCatInteractivity(), 300);
+        });
+
+        // Lottie Error Handling
+        const lottiePlayer = document.querySelector("#cat-lottie");
+        const fallbackLoader = document.querySelector("#fallback-loader");
+
+        if (lottiePlayer) {
+            lottiePlayer.addEventListener("error", () => {
+                console.warn("Lottie failed to load, switching to fallback.");
+                lottiePlayer.style.display = "none";
+                fallbackLoader.style.display = "block";
+            });
+        }
+    </script>
 </body>
+
 </html>

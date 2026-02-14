@@ -1,8 +1,19 @@
+:root {
+    --primary-color: #ffb7b2;
+    --secondary-color: #ff9a9e;
+    --text-color: #6d5b5b;
+    --text-muted: #8e7f7f;
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    /* Softer, premium shadow */
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Quicksand", "Montserrat", sans-serif;
 }
 
 body {
@@ -11,6 +22,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    /* Centering */
+    color: var(--text-color);
 }
 
 /* Background */
@@ -21,129 +35,263 @@ body {
     z-index: -1;
 }
 
-/* Heading */
-h1 {
-    margin-top: 60px;
-    color: #B35A72;
-    font-size: 2.2rem;
-    text-shadow: 0 4px 12px rgba(179, 90, 114, 0.25);
-}
-
-/* Main container */
-.main-container {
-    margin-top: 30px;
-}
-
-/* Image container */
-.img-container {
-    position: relative;
-    width: 220px;
-    height: 220px;
-    margin: 25px auto;
-}
-
-/* Cat Image */
-#cats-img {
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 16px;
-    opacity: 0;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    background: rgba(0, 0, 0, 0.35);
+    /* Subtle dark overlay */
+    backdrop-filter: blur(8px);
+    /* Stronger background blur for focus */
+    z-index: 0;
+    pointer-events: none;
 }
 
-#cats-img:hover {
-    transform: scale(1.05);
+/* Glass Card Refinement - COMPACT & GLASSMORPH */
+.glass-card {
+    background: rgba(255, 255, 255, 0.75);
+    /* High transparency glass */
+    backdrop-filter: blur(24px);
+    /* Premium blur */
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    /* Crisp border */
+    border-radius: 40px;
+    /* Rounder friendly corners */
+    padding: 2rem 1.8rem;
+    /* Compact padding */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 380px;
+    /* Reduced width for compactness */
+    position: relative;
+    overflow: visible;
+    /* Allow mascot to peek out */
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin-top: 50px;
+    /* Space for mascot */
 }
 
-/* Spinner overlay */
-.spinner {
+.glass-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Interactive Mascot Positioning */
+.mascot-container-top {
     position: absolute;
-    inset: 0;
+    top: -95px;
+    /* Sits on top edge */
+    left: -20px;
+    /* Hangs off left slightly */
+    width: 150px;
+    height: 150px;
+    z-index: 20;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
+    /* Shadow for depth */
+    pointer-events: none;
+    /* Let clicks pass through if needed */
+}
+
+/* Header Compact */
+header .icon-wrapper {
+    background: #fff;
+    width: 55px;
+    /* Smaller icon */
+    height: 55px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto 0.8rem;
+    box-shadow: 0 4px 12px rgba(255, 154, 158, 0.2);
+    border: 3px solid #ffe2e2;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 1.8rem;
+    /* Compact font */
+    color: #5d4a4a;
+    text-shadow: none;
+    margin-bottom: 0.1rem;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: #7a6b6b;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0px;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+
+/* Image Container */
+.img-container {
+    width: 100%;
+    height: 240px;
+    /* Shorter image area */
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #fff;
+}
+
+#cats-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+/* Loader */
+.spinner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Fact Text - Compact with scroll for long facts */
+.fact-container {
     background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(4px);
-    border-radius: 16px;
-    z-index: 2;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-top: 1.2rem;
+    position: relative;
+    color: #4a4a4a;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
+    min-height: 60px;
+    max-height: 100px;
+    /* More compact - limit height to prevent overflow */
+    overflow-y: auto;
+    /* Enable scrolling for long facts */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Spinner circle */
-.spinner::after {
-    content: "";
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3a7b5;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+/* Custom scrollbar styling for fact container */
+.fact-container::-webkit-scrollbar {
+    width: 6px;
 }
 
-@keyframes spin {
+.fact-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.fact-container::-webkit-scrollbar-thumb {
+    background: #ffb7b2;
+    border-radius: 10px;
+}
+
+.fact-container::-webkit-scrollbar-thumb:hover {
+    background: #ff9a9e;
+}
+
+.fact-text {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #555;
+    text-align: center;
+}
+
+.quote-icon {
+    display: none;
+    /* Hide for cleaner/compact look */
+}
+
+/* Button - Compact */
+.action-area {
+    margin-top: 1.2rem;
+}
+
+.btn-primary-custom {
+    background: #ff8fa3;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(1.75, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 0 #e06c80;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+}
+
+.btn-primary-custom:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #e06c80;
+    background: #ff9a9e;
+}
+
+.btn-primary-custom:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #e06c80;
+}
+
+.btn-primary-custom:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
     to {
-        transform: rotate(360deg);
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.hidden {
-    display: none;
-}
-
-/* Fact box */
-p {
-    margin: 20px auto;
-    max-width: 520px;
-    background: rgba(255, 245, 225, 0.75);
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-size: 1.05rem;
-    font-weight: 500;
-    line-height: 1.6;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-}
-
-/* Button */
-#btn {
-    margin-top: 20px;
-    padding: 12px 26px;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #F9C5C5, #F3A7B5);
-    color: #5b2a33;
-    cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 8px 20px rgba(249, 197, 197, 0.5);
-}
-
-#btn:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 12px 28px rgba(249, 197, 197, 0.7);
-}
-
-#btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+.content-wrapper {
+    animation: fadeIn 0.8s ease-out;
 }
 
 /* Mobile */
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.8rem;
-        margin-top: 40px;
+@media (max-width: 576px) {
+    .glass-card {
+        padding: 1.2rem;
+        width: 92%;
+        margin-top: 60px;
+        /* Ensure space for mascot on mobile */
+    }
+
+    .mascot-container-top {
+        width: 120px;
+        height: 120px;
+        top: -80px;
+        left: -10px;
     }
 
     .img-container {
-        width: 180px;
-        height: 180px;
+        height: 200px;
     }
 
-    p {
-        font-size: 1rem;
-        margin: 15px;
+    h1 {
+        font-size: 1.6rem;
     }
 }
