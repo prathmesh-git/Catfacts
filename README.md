@@ -161,7 +161,7 @@ This project is open source and available under the [MIT License](LICENSE).
 - Sleeping cat animation from [LottieFiles](https://lottiefiles.com/)
 - Icons from [Bootstrap Icons](https://icons.getbootstrap.com/)
 
-## 📧 Contact
+
 
 Created with 💖 by Prathmesh 
 
